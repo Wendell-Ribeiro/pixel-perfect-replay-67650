@@ -139,3 +139,7 @@
   background-clip: text;
   color: transparent;
 }
+
+.recharts-cartesian-axis-tick text {
+  fill: var(--muted-foreground);
+}

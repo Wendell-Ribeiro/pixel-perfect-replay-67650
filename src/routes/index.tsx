@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
   component: Dashboard,
 });
 
-const ibovSeries = demoSeries("IBOV", 30, 127000, 0.009);
+const ibovSeries = demoSeries("IBOV", 30, 126000, 0.014);
 
 function Dashboard() {
   const { list } = useWatchlist();
