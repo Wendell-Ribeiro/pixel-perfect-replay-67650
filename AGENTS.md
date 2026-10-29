@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Demo market data lives in `src/lib/demo-data.ts` and plan prices in `src/lib/plans.ts`; pages import from there so real data/APIs can replace them in one place later.
+- Shared app shell (sidebar + mobile bottom nav) is `src/components/fin/AppShell.tsx`, mounted in `__root.tsx`; reusable finance UI lives in `src/components/fin/primitives.tsx`.
