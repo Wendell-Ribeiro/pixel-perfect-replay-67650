@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AcompanhamentoRouteImport } from './routes/acompanhamento'
+import { Route as AssistenteRouteImport } from './routes/assistente'
+import { Route as IndicadoresRouteImport } from './routes/indicadores'
+import { Route as NoticiasRouteImport } from './routes/noticias'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as PlanosRouteImport } from './routes/planos'
+import { Route as MercadoIndexRouteImport } from './routes/mercado.index'
+import { Route as MercadoTickerRouteImport } from './routes/mercado.$ticker'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AcompanhamentoRoute = AcompanhamentoRouteImport.update({
+  id: '/acompanhamento',
+  path: '/acompanhamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistenteRoute = AssistenteRouteImport.update({
+  id: '/assistente',
+  path: '/assistente',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndicadoresRoute = IndicadoresRouteImport.update({
+  id: '/indicadores',
+  path: '/indicadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NoticiasRoute = NoticiasRouteImport.update({
+  id: '/noticias',
+  path: '/noticias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MercadoIndexRoute = MercadoIndexRouteImport.update({
+  id: '/mercado/',
+  path: '/mercado/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MercadoTickerRoute = MercadoTickerRouteImport.update({
+  id: '/mercado/$ticker',
+  path: '/mercado/$ticker',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/acompanhamento': typeof AcompanhamentoRoute
+  '/assistente': typeof AssistenteRoute
+  '/indicadores': typeof IndicadoresRoute
+  '/noticias': typeof NoticiasRoute
+  '/perfil': typeof PerfilRoute
+  '/planos': typeof PlanosRoute
+  '/mercado/$ticker': typeof MercadoTickerRoute
+  '/mercado/': typeof MercadoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/acompanhamento': typeof AcompanhamentoRoute
+  '/assistente': typeof AssistenteRoute
+  '/indicadores': typeof IndicadoresRoute
+  '/noticias': typeof NoticiasRoute
+  '/perfil': typeof PerfilRoute
+  '/planos': typeof PlanosRoute
+  '/mercado/$ticker': typeof MercadoTickerRoute
+  '/mercado': typeof MercadoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/acompanhamento': typeof AcompanhamentoRoute
+  '/assistente': typeof AssistenteRoute
+  '/indicadores': typeof IndicadoresRoute
+  '/noticias': typeof NoticiasRoute
+  '/perfil': typeof PerfilRoute
+  '/planos': typeof PlanosRoute
+  '/mercado/$ticker': typeof MercadoTickerRoute
+  '/mercado/': typeof MercadoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/acompanhamento'
+    | '/assistente'
+    | '/indicadores'
+    | '/noticias'
+    | '/perfil'
+    | '/planos'
+    | '/mercado/$ticker'
+    | '/mercado/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/acompanhamento'
+    | '/assistente'
+    | '/indicadores'
+    | '/noticias'
+    | '/perfil'
+    | '/planos'
+    | '/mercado/$ticker'
+    | '/mercado'
+  id:
+    | '__root__'
+    | '/'
+    | '/acompanhamento'
+    | '/assistente'
+    | '/indicadores'
+    | '/noticias'
+    | '/perfil'
+    | '/planos'
+    | '/mercado/$ticker'
+    | '/mercado/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcompanhamentoRoute: typeof AcompanhamentoRoute
+  AssistenteRoute: typeof AssistenteRoute
+  IndicadoresRoute: typeof IndicadoresRoute
+  NoticiasRoute: typeof NoticiasRoute
+  PerfilRoute: typeof PerfilRoute
+  PlanosRoute: typeof PlanosRoute
+  MercadoTickerRoute: typeof MercadoTickerRoute
+  MercadoIndexRoute: typeof MercadoIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/acompanhamento': {
+      id: '/acompanhamento'
+      path: '/acompanhamento'
+      fullPath: '/acompanhamento'
+      preLoaderRoute: typeof AcompanhamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistente': {
+      id: '/assistente'
+      path: '/assistente'
+      fullPath: '/assistente'
+      preLoaderRoute: typeof AssistenteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/indicadores': {
+      id: '/indicadores'
+      path: '/indicadores'
+      fullPath: '/indicadores'
+      preLoaderRoute: typeof IndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/noticias': {
+      id: '/noticias'
+      path: '/noticias'
+      fullPath: '/noticias'
+      preLoaderRoute: typeof NoticiasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mercado/': {
+      id: '/mercado/'
+      path: '/mercado'
+      fullPath: '/mercado/'
+      preLoaderRoute: typeof MercadoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mercado/$ticker': {
+      id: '/mercado/$ticker'
+      path: '/mercado/$ticker'
+      fullPath: '/mercado/$ticker'
+      preLoaderRoute: typeof MercadoTickerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcompanhamentoRoute: AcompanhamentoRoute,
+  AssistenteRoute: AssistenteRoute,
+  IndicadoresRoute: IndicadoresRoute,
+  NoticiasRoute: NoticiasRoute,
+  PerfilRoute: PerfilRoute,
+  PlanosRoute: PlanosRoute,
+  MercadoTickerRoute: MercadoTickerRoute,
+  MercadoIndexRoute: MercadoIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
