@@ -29,7 +29,7 @@ export const Route = createFileRoute("/mercado/$ticker")({
 function Detail() {
   const { stock: s } = Route.useLoaderData();
   const series = demoSeries(s.ticker, 30, s.price / (1 + s.change / 100) * 0.95, 0.02);
-  series[series.length - 1].value = s.price;
+  series[series.length - 1]!.value = s.price;
   const tip = (k: string) => INDICATORS.find((i) => i.key === k)?.tooltip ?? "";
   const metrics = [
     { k: "pl", label: "P/L", v: num(s.pl, 1) },
