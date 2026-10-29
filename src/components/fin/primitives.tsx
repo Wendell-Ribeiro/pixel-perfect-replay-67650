@@ -107,18 +107,14 @@ export function SeriesChart({ data, height = 240, positive = true, compact = fal
               <stop offset="100%" stopColor={color} stopOpacity={0} />
             </linearGradient>
           </defs>
-          {!compact && (
-            <>
-              <XAxis dataKey="date" tickFormatter={(d) => dateBR(d).slice(0, 5)} tick={{ fill: "var(--muted-foreground)", fontSize: 11 }} axisLine={false} tickLine={false} minTickGap={30} />
-              <YAxis domain={["auto", "auto"]} tickFormatter={(v) => num(v)} tick={{ fill: "var(--muted-foreground)", fontSize: 11 }} axisLine={false} tickLine={false} width={64} orientation="right" />
-              <Tooltip
+              <XAxis hide={compact} dataKey="date" tickFormatter={(d) => dateBR(d).slice(0, 5)} tick={{ fill: "var(--muted-foreground)", fontSize: 11 }} axisLine={false} tickLine={false} minTickGap={30} />
+              <YAxis hide={compact} domain={["auto", "auto"]} tickFormatter={(v) => num(v)} tick={{ fill: "var(--muted-foreground)", fontSize: 11 }} axisLine={false} tickLine={false} width={64} orientation="right" />
+              {!compact && <Tooltip
                 contentStyle={{ background: "var(--popover)", border: "1px solid var(--border)", borderRadius: 8, fontSize: 12 }}
                 labelStyle={{ color: "var(--muted-foreground)" }}
                 labelFormatter={(d) => dateBR(String(d))}
                 formatter={(v: number) => [num(v, 2), "Valor"]}
-              />
-            </>
-          )}
+              />}
           <Area type="monotone" dataKey="value" stroke={color} strokeWidth={2} fill={`url(#${id})`} dot={false} />
         </AreaChart>
       </ResponsiveContainer>
