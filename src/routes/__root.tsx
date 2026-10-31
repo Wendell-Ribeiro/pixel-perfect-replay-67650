@@ -16,6 +16,7 @@ import { AppShell } from "@/components/fin/AppShell";
 import { WatchlistProvider } from "@/lib/watchlist";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { WorkspaceProvider } from "@/lib/workspace";
 
 function NotFoundComponent() {
   return (
@@ -128,10 +129,12 @@ function RootComponent() {
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <TooltipProvider delayDuration={150}>
         <WatchlistProvider>
+          <WorkspaceProvider>
           <AppShell>
             <Outlet />
           </AppShell>
           <Toaster />
+          </WorkspaceProvider>
         </WatchlistProvider>
       </TooltipProvider>
     </QueryClientProvider>
