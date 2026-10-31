@@ -27,6 +27,7 @@ function Watch() {
   return (
     <>
       <PageHeader title="Minha lista" subtitle="Suas ações favoritas, sempre à mão." actions={<DemoBadge />} />
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3"><p className="text-xs text-muted-foreground">Lista demonstrativa salva neste navegador. Cotações fictícias; monitoramento automático não ativo.</p><Button asChild variant="outline" size="sm"><Link to="/alertas">Ver alertas</Link></Button></div>
       <div className="panel mb-4 flex flex-col gap-3 p-4 sm:flex-row">
         <Select value={pick} onValueChange={setPick}>
           <SelectTrigger className="sm:w-80"><SelectValue placeholder="Escolha uma ação para adicionar" /></SelectTrigger>
@@ -52,7 +53,7 @@ function Watch() {
                     <p className="font-semibold">{t}</p>
                     <p className="text-xs text-muted-foreground">{s.name}</p>
                   </Link>
-                  <button onClick={() => remove(t)} aria-label={`Remover ${t}`} className="rounded-md p-2 text-muted-foreground hover:bg-loss/15 hover:text-loss"><Trash2 className="h-4 w-4" /></button>
+                  <Button variant="ghost" size="icon" onClick={() => remove(t)} aria-label={`Remover ${t}`} className="text-muted-foreground hover:bg-loss/15 hover:text-loss"><Trash2 className="h-4 w-4" /></Button>
                 </div>
                 <div className="mt-3"><SeriesChart data={demoSeries(t, 20)} height={60} positive={s.change >= 0} compact /></div>
                 <div className="mt-2 flex items-baseline justify-between">

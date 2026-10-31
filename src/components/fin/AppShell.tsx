@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { BarChart3, BookOpen, Crown, LayoutDashboard, Newspaper, Sparkles, Star, User, Menu } from "lucide-react";
+import { BarChart3, BookOpen, Crown, LayoutDashboard, Newspaper, Sparkles, Star, User, Menu, Clock, Bell } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useState, type ReactNode } from "react";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -11,6 +12,8 @@ const NAV = [
   { to: "/indicadores", label: "Indicadores", icon: BookOpen },
   { to: "/assistente", label: "Assistente IA", icon: Sparkles, premium: true },
   { to: "/acompanhamento", label: "Minha lista", icon: Star },
+  { to: "/historico", label: "Histórico", icon: Clock },
+  { to: "/alertas", label: "Alertas", icon: Bell },
   { to: "/planos", label: "Planos", icon: Crown },
   { to: "/perfil", label: "Perfil", icon: User },
 ] as const;
@@ -63,17 +66,17 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen lg:pl-64">
       <aside className="fixed inset-y-0 left-0 hidden w-64 flex-col border-r border-sidebar-border bg-sidebar p-5 lg:flex">
         <Logo />
-        <div className="mt-8 flex-1"><NavList /></div>
+        <div className="mt-8 flex-1 overflow-y-auto"><NavList /></div>
         <Link to="/planos" className="bg-premium rounded-xl border border-gold/30 p-4">
           <Crown className="h-5 w-5 text-gold" />
           <p className="mt-2 text-sm font-semibold">Seja Premium</p>
-          <p className="mt-1 text-xs text-muted-foreground">Análises com IA de até 5 ações.</p>
+          <p className="mt-1 text-xs text-muted-foreground">Inteligência especializada em ações da B3.</p>
         </Link>
       </aside>
 
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-background/85 px-4 py-3 backdrop-blur lg:hidden">
         <Logo />
-        <button onClick={() => setOpen(true)} aria-label="Abrir menu" className="rounded-md p-2 hover:bg-accent"><Menu className="h-5 w-5" /></button>
+        <Button variant="ghost" size="icon" onClick={() => setOpen(true)} aria-label="Abrir menu"><Menu className="h-5 w-5" /></Button>
       </header>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent side="left" className="w-72 border-sidebar-border bg-sidebar p-5">
