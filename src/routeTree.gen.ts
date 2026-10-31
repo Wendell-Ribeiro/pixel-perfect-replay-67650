@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AcompanhamentoRouteImport } from './routes/acompanhamento'
+import { Route as AlertasRouteImport } from './routes/alertas'
 import { Route as AssistenteRouteImport } from './routes/assistente'
+import { Route as HistoricoRouteImport } from './routes/historico'
 import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as PerfilRouteImport } from './routes/perfil'
@@ -29,9 +31,19 @@ const AcompanhamentoRoute = AcompanhamentoRouteImport.update({
   path: '/acompanhamento',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlertasRoute = AlertasRouteImport.update({
+  id: '/alertas',
+  path: '/alertas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AssistenteRoute = AssistenteRouteImport.update({
   id: '/assistente',
   path: '/assistente',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoricoRoute = HistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndicadoresRoute = IndicadoresRouteImport.update({
@@ -68,7 +80,9 @@ const MercadoTickerRoute = MercadoTickerRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/acompanhamento': typeof AcompanhamentoRoute
+  '/alertas': typeof AlertasRoute
   '/assistente': typeof AssistenteRoute
+  '/historico': typeof HistoricoRoute
   '/indicadores': typeof IndicadoresRoute
   '/noticias': typeof NoticiasRoute
   '/perfil': typeof PerfilRoute
@@ -79,7 +93,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/acompanhamento': typeof AcompanhamentoRoute
+  '/alertas': typeof AlertasRoute
   '/assistente': typeof AssistenteRoute
+  '/historico': typeof HistoricoRoute
   '/indicadores': typeof IndicadoresRoute
   '/noticias': typeof NoticiasRoute
   '/perfil': typeof PerfilRoute
@@ -91,7 +107,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/acompanhamento': typeof AcompanhamentoRoute
+  '/alertas': typeof AlertasRoute
   '/assistente': typeof AssistenteRoute
+  '/historico': typeof HistoricoRoute
   '/indicadores': typeof IndicadoresRoute
   '/noticias': typeof NoticiasRoute
   '/perfil': typeof PerfilRoute
@@ -104,7 +122,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/acompanhamento'
+    | '/alertas'
     | '/assistente'
+    | '/historico'
     | '/indicadores'
     | '/noticias'
     | '/perfil'
@@ -115,7 +135,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/acompanhamento'
+    | '/alertas'
     | '/assistente'
+    | '/historico'
     | '/indicadores'
     | '/noticias'
     | '/perfil'
@@ -126,7 +148,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/acompanhamento'
+    | '/alertas'
     | '/assistente'
+    | '/historico'
     | '/indicadores'
     | '/noticias'
     | '/perfil'
@@ -138,7 +162,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AcompanhamentoRoute: typeof AcompanhamentoRoute
+  AlertasRoute: typeof AlertasRoute
   AssistenteRoute: typeof AssistenteRoute
+  HistoricoRoute: typeof HistoricoRoute
   IndicadoresRoute: typeof IndicadoresRoute
   NoticiasRoute: typeof NoticiasRoute
   PerfilRoute: typeof PerfilRoute
@@ -163,11 +189,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AcompanhamentoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alertas': {
+      id: '/alertas'
+      path: '/alertas'
+      fullPath: '/alertas'
+      preLoaderRoute: typeof AlertasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/assistente': {
       id: '/assistente'
       path: '/assistente'
       fullPath: '/assistente'
       preLoaderRoute: typeof AssistenteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/historico': {
+      id: '/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof HistoricoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/indicadores': {
@@ -218,7 +258,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AcompanhamentoRoute: AcompanhamentoRoute,
+  AlertasRoute: AlertasRoute,
   AssistenteRoute: AssistenteRoute,
+  HistoricoRoute: HistoricoRoute,
   IndicadoresRoute: IndicadoresRoute,
   NoticiasRoute: NoticiasRoute,
   PerfilRoute: PerfilRoute,

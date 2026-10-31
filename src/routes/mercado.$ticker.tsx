@@ -29,7 +29,8 @@ export const Route = createFileRoute("/mercado/$ticker")({
 function Detail() {
   const { stock: s } = Route.useLoaderData();
   const series = demoSeries(s.ticker, 30, s.price / (1 + s.change / 100) * 0.95, 0.02);
-  series[series.length - 1]!.value = s.price;
+  const last = series.at(-1);
+  if (last) last.value = s.price;
   const tip = (k: string) => INDICATORS.find((i) => i.key === k)?.tooltip ?? "";
   const metrics = [
     { k: "pl", label: "P/L", v: num(s.pl, 1) },
@@ -75,6 +76,8 @@ function Detail() {
           <Panel title="Sobre a empresa"><p className="text-sm leading-relaxed text-muted-foreground">{s.about}</p></Panel>
         </div>
       </div>
+      <div className="mt-5 flex flex-wrap items-center gap-4"><Button asChild><Link to="/assistente">Preparar análise</Link></Button><p className="text-xs text-muted-foreground">Fonte: amostra demonstrativa PregãoIA. Sem data de referência real; indicadores e gráfico fictícios.</p></div>
+      <section className="mt-6 border-t border-border pt-5"><h2 className="font-semibold">Resultados, endividamento e histórico financeiro</h2><p className="mt-2 text-sm text-muted-foreground">Indisponíveis até a integração com fontes verificáveis. Nenhum balanço ou conclusão foi gerado.</p></section>
     </>
   );
 }

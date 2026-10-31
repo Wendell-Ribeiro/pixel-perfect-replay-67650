@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Change, DemoBadge, PageHeader, StarButton, TickerLogo } from "@/components/fin/primitives";
 import { SECTORS, STOCKS } from "@/lib/demo-data";
 import { brl } from "@/lib/format";
+import { searchStocks } from "@/lib/market";
 
 export const Route = createFileRoute("/mercado/")({
   head: () => ({
@@ -25,9 +26,7 @@ function Mercado() {
   const [sector, setSector] = useState("todos");
   const [dir, setDir] = useState("todas");
   const rows = useMemo(() => {
-    const t = q.trim().toLowerCase();
-    return STOCKS.filter((s) =>
-      (!t || s.ticker.toLowerCase().includes(t) || s.name.toLowerCase().includes(t)) &&
+    return searchStocks(q).filter((s) =>
       (sector === "todos" || s.sector === sector) &&
       (dir === "todas" || (dir === "alta" ? s.change >= 0 : s.change < 0)));
   }, [q, sector, dir]);
@@ -35,10 +34,11 @@ function Mercado() {
   return (
     <>
       <PageHeader title="Mercado de ações" subtitle="Explore as principais ações da bolsa brasileira." actions={<DemoBadge />} />
+      <p className="mb-4 text-sm text-muted-foreground">Amostra de {STOCKS.length} ações. Preços e indicadores fictícios, sem data de mercado real. Catálogo completo da B3 e cotações reais ainda não conectados.</p>
       <div className="panel mb-4 flex flex-col gap-3 p-4 md:flex-row">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar por ticker ou empresa (ex.: PETR4)" className="pl-9" />
+          <Input aria-label="Buscar ações" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Ticker, empresa ou nome conhecido (ex.: Magalu)" className="pl-9" />
         </div>
         <Select value={sector} onValueChange={setSector}>
           <SelectTrigger className="md:w-52"><SelectValue /></SelectTrigger>
@@ -57,6 +57,8 @@ function Mercado() {
         </Select>
       </div>
 
+      <p className="mb-3 text-xs text-muted-foreground">{rows.length} ações encontradas na amostra demonstrativa.</p>
+
       <div className="panel overflow-x-auto">
         <table className="w-full min-w-[640px] text-sm">
           <thead>
@@ -65,6 +67,8 @@ function Mercado() {
               <th className="px-4 py-3 font-medium">Setor</th>
               <th className="px-4 py-3 text-right font-medium">Preço</th>
               <th className="px-4 py-3 text-right font-medium">Var. dia</th>
+              <th className="px-4 py-3 text-right font-medium">P/L</th>
+              <th className="px-4 py-3 text-right font-medium">DY</th>
               <th className="px-4 py-3" />
             </tr>
           </thead>
@@ -80,6 +84,8 @@ function Mercado() {
                 <td className="px-4 py-3 text-muted-foreground">{s.sector}</td>
                 <td className="num px-4 py-3 text-right">{brl(s.price)}</td>
                 <td className="px-4 py-3 text-right"><Change value={s.change} icon /></td>
+                <td className="num px-4 py-3 text-right">{s.pl.toLocaleString("pt-BR")}</td>
+                <td className="num px-4 py-3 text-right">{s.dy.toLocaleString("pt-BR")}%</td>
                 <td className="px-4 py-3">
                   <div className="flex items-center justify-end gap-1">
                     <StarButton ticker={s.ticker} />
@@ -89,7 +95,7 @@ function Mercado() {
               </tr>
             ))}
             {rows.length === 0 && (
-              <tr><td colSpan={5} className="px-4 py-12 text-center text-muted-foreground">Nenhuma ação encontrada com esses filtros.</td></tr>
+              <tr><td colSpan={7} className="px-4 py-12 text-center text-muted-foreground">Nenhuma ação encontrada nesta amostra. O catálogo completo ainda não está conectado.</td></tr>
             )}
           </tbody>
         </table>

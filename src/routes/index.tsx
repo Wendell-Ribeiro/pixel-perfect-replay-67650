@@ -5,6 +5,7 @@ import { Change, DemoBadge, Panel, PageHeader, SeriesChart, StockRow } from "@/c
 import { IBOV, NEWS, STOCKS, demoSeries, getStock } from "@/lib/demo-data";
 import { dateTimeBR, num, pct } from "@/lib/format";
 import { useWatchlist } from "@/lib/watchlist";
+import { useWorkspace } from "@/lib/workspace";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,6 +23,7 @@ const ibovSeries = demoSeries("IBOV", 30, 126000, 0.014);
 
 function Dashboard() {
   const { list } = useWatchlist();
+  const { requests } = useWorkspace();
   const sorted = [...STOCKS].sort((a, b) => b.change - a.change);
   const ups = STOCKS.filter((s) => s.change >= 0).length;
   return (
@@ -61,12 +63,16 @@ function Dashboard() {
           <div className="bg-premium relative overflow-hidden rounded-xl border border-gold/30 p-5">
             <Sparkles className="h-6 w-6 text-gold" />
             <h3 className="mt-3 text-lg font-semibold">Assistente de IA <span className="text-gold-gradient">Premium</span></h3>
-            <p className="mt-1 text-sm text-muted-foreground">Análises personalizadas de até 5 ações, de acordo com seus objetivos e perfil.</p>
+             <p className="mt-1 text-sm text-muted-foreground">Análises de ações da B3 com seu contexto de investidor. Dados verificáveis e IA ainda não conectados.</p>
             <Button asChild className="mt-4 bg-gold text-gold-foreground hover:opacity-90">
               <Link to="/assistente">Conhecer o assistente <ArrowRight className="h-4 w-4" /></Link>
             </Button>
           </div>
         </div>
+      </div>
+      <div className="mt-6 grid gap-6 border-t border-border pt-5 md:grid-cols-2">
+        <section><div className="flex items-center justify-between gap-2"><h2 className="font-semibold">Análises recentes</h2><Button asChild variant="link" size="sm"><Link to="/historico">Histórico</Link></Button></div><p className="mt-2 text-sm text-muted-foreground">Nenhuma análise concluída. {requests.length} consultas preparadas nesta sessão, aguardando dados e IA.</p></section>
+        <section><div className="flex items-center justify-between gap-2"><h2 className="font-semibold">Alertas importantes</h2><Button asChild variant="link" size="sm"><Link to="/alertas">Ver alertas</Link></Button></div><p className="mt-2 text-sm text-muted-foreground">Monitoramento ainda não ativo. A ausência de alertas não indica ausência de mudanças nas empresas.</p></section>
       </div>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-3">
